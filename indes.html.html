@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Shop — Online Store</title>
+<style>
+  :root{
+    --ink:#1c1f3d;
+    --paper:#faf6ec;
+    --marigold:#e8a534;
+    --marigold-deep:#c8801f;
+    --indigo:#2b3a8f;
+    --line:#e3dcc8;
+    --green:#2f8f5b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Segoe UI', 'Noto Sans Bengali', Arial, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+  }
+  header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 6vw;
+    border-bottom:3px solid var(--indigo);
+    background:var(--paper);
+    position:sticky; top:0; z-index:10;
+  }
+  .brand{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:1.6rem; font-weight:700; color:var(--indigo);
+    letter-spacing:0.5px;
+  }
+  .brand span{color:var(--marigold-deep);}
+  nav a{
+    margin-left:24px; text-decoration:none; color:var(--ink);
+    font-size:0.95rem; font-weight:600;
+  }
+  nav a:hover{color:var(--marigold-deep);}
+
+  .hero{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    padding:60px 6vw 40px; gap:24px;
+    background:linear-gradient(180deg, #fff8ea 0%, var(--paper) 100%);
+  }
+  .hero-text{max-width:520px;}
+  .eyebrow{
+    display:inline-block; background:var(--indigo); color:#fff;
+    font-size:0.75rem; font-weight:700; letter-spacing:1.5px;
+    padding:5px 12px; border-radius:20px; margin-bottom:16px; text-transform:uppercase;
+  }
+  h1{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:2.6rem; line-height:1.15; color:var(--ink); margin-bottom:16px;
+  }
+  h1 em{color:var(--marigold-deep); font-style:normal;}
+  .hero-text p{font-size:1.05rem; color:#4a4a4a; margin-bottom:24px;}
+  .btn{
+    display:inline-block; padding:14px 28px; border-radius:6px;
+    font-weight:700; text-decoration:none; font-size:1rem;
+    border:2px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--marigold); color:var(--ink);}
+  .btn-primary:hover{background:var(--marigold-deep); color:#fff;}
+  .btn-outline{border-color:var(--indigo); color:var(--indigo); margin-left:12px; background:none;}
+  .btn-outline:hover{background:var(--indigo); color:#fff;}
+
+  .hero-badge{
+    width:220px; height:220px; border-radius:50%;
+    background:var(--indigo); color:#fff; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; flex-shrink:0;
+    box-shadow:0 10px 30px rgba(43,58,143,0.25);
+  }
+  .hero-badge .num{font-size:2.2rem; font-weight:800; font-family:Georgia,serif;}
+  .hero-badge .lbl{font-size:0.8rem; opacity:0.85; margin-top:4px; padding:0 20px;}
+
+  section{padding:50px 6vw;}
+  .section-title{
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:1.9rem; color:var(--ink); margin-bottom:8px;
+  }
+  .section-sub{color:#666; margin-bottom:32px; font-size:0.98rem;}
+
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+    gap:24px;
+  }
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; transition:transform 0.2s, box-shadow 0.2s;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,0,0,0.08);}
+  .card-img{
+    height:170px; display:flex; align-items:center; justify-content:center;
+    font-size:3rem; background:linear-gradient(135deg,#fff3d9,#ffe6c2);
+  }
+  .card-body{padding:16px; display:flex; flex-direction:column; flex:1;}
+  .card-body h3{font-size:1.05rem; margin-bottom:6px;}
+  .card-body .desc{font-size:0.88rem; color:#666; flex:1; margin-bottom:12px;}
+  .price-row{display:flex; justify-content:space-between; align-items:center;}
+  .price{font-weight:800; color:var(--indigo); font-size:1.1rem;}
+  .order-btn{
+    background:var(--green); color:#fff; border:none; padding:9px 14px;
+    border-radius:6px; font-weight:700; font-size:0.85rem; cursor:pointer;
+  }
+  .order-btn:hover{background:#256d46;}
+
+  .about{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .about-inner{max-width:700px;}
+
+  footer{
+    padding:40px 6vw; background:var(--indigo); color:#fff;
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;
+  }
+  footer .brand{color:#fff;}
+  footer .brand span{color:var(--marigold);}
+  .foot-links a{color:#fff; text-decoration:none; margin-right:18px; font-size:0.9rem; opacity:0.9;}
+  .foot-links a:hover{opacity:1; text-decoration:underline;}
+  .copy{width:100%; text-align:center; font-size:0.8rem; opacity:0.7; margin-top:20px;}
+
+  #cartFloat{
+    position:fixed; bottom:22px; right:22px; background:var(--green); color:#fff;
+    padding:14px 20px; border-radius:30px; font-weight:700; box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    text-decoration:none; display:flex; align-items:center; gap:8px; z-index:20;
+  }
+  @media(max-width:640px){
+    h1{font-size:2rem;}
+    .hero{padding:40px 6vw;}
+    header{flex-direction:column; gap:12px;}
+    nav a{margin:0 10px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Amar<span>Dokan</span></div>
+  <nav>
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <span class="eyebrow">Now Open For Orders</span>
+    <h1>Quality products, <em>straight to your door.</em></h1>
+    <p>Ei jaigay tomar business er ekta short, catchy description likho — tumi ki bikri koro, kar jonno, ar keno tomar theke kena uchit.</p>
+    <a href="#products" class="btn btn-primary">Shop Now</a>
+    <a href="#contact" class="btn btn-outline">Contact</a>
+  </div>
+  <div class="hero-badge">
+    <div class="num">100%</div>
+    <div class="lbl">Original Product Guarantee</div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="section-title">Our Products</div>
+  <div class="section-sub">Product er chobi, naam, price nijer moto edit koro (niche code e).</div>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<section id="about" class="about">
+  <div class="about-inner">
+    <div class="section-title">About Us</div>
+    <p style="color:#555;">Ekhane tomar shop er golpo likho — kobe shuru korle, ki bikri koro, keno customer der bishwash kora uchit. Ekta genuine, chotto story customer der bhroshsha barai.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-title">Contact / Order</div>
+  <p class="section-sub">Order korte WhatsApp e message koro othoba nichher button e click koro.</p>
+  <a class="btn btn-primary" id="waMain" href="#" target="_blank">Message on WhatsApp</a>
+</section>
+
+<footer>
+  <div>
+    <div class="brand">Amar<span>Dokan</span></div>
+    <p style="opacity:0.8; font-size:0.85rem; margin-top:8px;">Tomar shop er tagline ekhane likho.</p>
+  </div>
+  <div class="foot-links">
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="copy">© 2026 AmarDokan. All rights reserved.</div>
+</footer>
+
+<a id="cartFloat" href="#" target="_blank">💬 Order on WhatsApp</a>
+
+<script>
+/* ============================================
+   EDIT THIS SECTION ONLY — nichey nijer product,
+   dokan er naam, ar WhatsApp number boshao.
+   ============================================ */
+
+// 1) Tomar WhatsApp number (country code shoho, + chara)
+//    Example: Bangladesh number 01712345678 hole -> "8801712345678"
+const WHATSAPP_NUMBER = "8801XXXXXXXXX";
+
+// 2) Product list — jotogulo dorkar totogulo item add koro
+const PRODUCTS = [
+  {
+    name: "Product Name 1",
+    price: 500,
+    desc: "Chotto ekta description ei product ta niye.",
+    emoji: "👕"
+  },
+  {
+    name: "Product Name 2",
+    price: 750,
+    desc: "Chotto ekta description ei product ta niye.",
+    emoji: "👜"
+  },
+  {
+    name: "Product Name 3",
+    price: 300,
+    desc: "Chotto ekta description ei product ta niye.",
+    emoji: "🎧"
+  },
+  {
+    name: "Product Name 4",
+    price: 1200,
+    desc: "Chotto ekta description ei product ta niye.",
+    emoji: "👟"
+  }
+];
+
+/* ============================================
+   NICHER CODE EDIT KORAR DORKAR NEI
+   ============================================ */
+
+const grid = document.getElementById('productGrid');
+PRODUCTS.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-img">${p.emoji}</div>
+    <div class="card-body">
+      <h3>${p.name}</h3>
+      <div class="desc">${p.desc}</div>
+      <div class="price-row">
+        <span class="price">৳${p.price}</span>
+        <button class="order-btn" onclick="orderProduct('${p.name.replace(/'/g,"")}', ${p.price})">Order</button>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function orderProduct(name, price) {
+  const msg = encodeURIComponent(`Hi! Ami order dite chai:\n\nProduct: ${name}\nPrice: ৳${price}\n\nAmar naam:\nAmar thikana:\nPhone number:`);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+}
+
+// General WhatsApp buttons
+const generalMsg = encodeURIComponent("Hi! Ami tomar shop theke order dite chai.");
+document.getElementById('waMain').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${generalMsg}`;
+document.getElementById('cartFloat').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${generalMsg}`;
+</script>
+
+</body>
+</html>
